@@ -55,9 +55,9 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
-                    sh"terraform init"
-                    sh"terraform plan"
-                    sh"terraform apply -auto-approve"
+                    sh"sudo terraform init"
+                    sh"sudo terraform plan"
+                    sh"sudo terraform apply -auto-approve"
                 }
             }
         }        
