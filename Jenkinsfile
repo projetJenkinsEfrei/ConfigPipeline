@@ -52,9 +52,9 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
-                    sh"terraform init"
-                    sh"terraform plan"
-                    sh"terraform apply"
+                    sh"terraform init -auto-approve"
+                    sh"terraform plan -auto-approve"
+                    sh"terraform apply -auto-approve"
                 }
             }
         }
