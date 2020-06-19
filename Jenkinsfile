@@ -41,7 +41,7 @@ pipeline {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_Infra',
                         credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
-                        branch: "MPI-DEV"
+                        branch: "master"
                     )
                 }
             }
@@ -58,6 +58,5 @@ pipeline {
                 }
             }
         }
-
     }
 }
