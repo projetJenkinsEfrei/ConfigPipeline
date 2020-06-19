@@ -55,6 +55,7 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
+                    sh"terraform init"
                     sh"terraform plan --out plan"
                     sh"terraform apply plan -auto-approve"
                 }
