@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+        ansiColor('xterm')
+    }
     stages {
         /*stage('Clean workspace')
         {
@@ -57,6 +60,6 @@ pipeline {
                     sh"terraform apply -auto-approve"
                 }
             }
-        }
+        }        
     }
 }
