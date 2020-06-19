@@ -1,13 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Clean workspace')
+        /*stage('Clean workspace')
         {
             steps
             {
                 cleanWs()
             }
-        }
+        }*/
         stage('Git clone ansible and packer') 
         {
             steps 
@@ -29,6 +29,32 @@ pipeline {
                 dir('Build_AMI')
                 {
                     sh"packer build Packer/buildAMI.json"
+                }
+            }
+        }
+        stage('Git clone web infra deployement') 
+        {
+            steps 
+            {
+                dir('Infra_dep')
+                {
+                    git(
+                        url: 'https://github.com/birintha/CICD_TP_Deploy_Infra',
+                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
+                        branch: "MPI-DEV"
+                    )
+                }
+            }
+        }
+        stage('Apply web infra')
+        {
+            steps
+            {
+                dir('Infra_dep')
+                {
+                    sh"terraform init"
+                    sh"terraform plan"
+                    sh"terraform apply"
                 }
             }
         }
