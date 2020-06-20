@@ -10,7 +10,7 @@ pipeline {
             {
                 cleanWs()
             }
-        }
+        }*/
         stage('Git clone ansible and packer') 
         {
             steps 
@@ -34,8 +34,8 @@ pipeline {
                     sh"packer build Packer/buildAMI.json"
                 }
             }
-        }*/
-        stage('Git clone web infra deployement') 
+        }
+        stage('Git clone infra deployement') 
         {
             steps 
             {
@@ -49,7 +49,7 @@ pipeline {
                 }
             }
         }
-        stage('Apply web infra')
+        stage('Apply infra')
         {
             steps
             {
@@ -59,6 +59,31 @@ pipeline {
                     sh"terraform apply -auto-approve"
                 }
             }
-        }        
+        }
+        stage('Git clone web deployement') 
+        {
+            steps 
+            {
+                dir('Web_dep')
+                {
+                    git(
+                        url: 'https://github.com/birintha/CICD_TP_Deploy_WebApp',
+                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
+                        branch: "master"
+                    )
+                }
+            }
+        }
+        stage('Apply web')
+        {
+            steps
+            {
+                dir('Web_dep')
+                {
+                    sh"terraform init"
+                    sh"terraform apply -auto-approve"
+                }
+            }
+        }     
     }
 }
