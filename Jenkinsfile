@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+        ansiColor('xterm')
+    }
     stages {
         stage('Clean workspace')
         {
@@ -18,6 +21,7 @@ pipeline {
                         url: 'https://github.com/birintha/CICD_TP_Build_AMI',
                         credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
                         branch: "master"
+
                     )
                 }
             }
@@ -32,6 +36,55 @@ pipeline {
                 }
             }
         }
-
+        stage('Git clone infra deployement') 
+        {
+            steps 
+            {
+                dir('Infra_dep')
+                {
+                    git(
+                        url: 'https://github.com/birintha/CICD_TP_Deploy_Infra',
+                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
+                        branch: "master"
+                    )
+                }
+            }
+        }
+        stage('Apply infra')
+        {
+            steps
+            {
+                dir('Infra_dep')
+                {
+                    sh"terraform init"
+                    sh"terraform apply -auto-approve"
+                }
+            }
+        }
+        stage('Git clone web deployement') 
+        {
+            steps 
+            {
+                dir('Web_dep')
+                {
+                    git(
+                        url: 'https://github.com/birintha/CICD_TP_Deploy_WebApp',
+                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
+                        branch: "master"
+                    )
+                }
+            }
+        }
+        stage('Apply web')
+        {
+            steps
+            {
+                dir('Web_dep')
+                {
+                    sh"terraform init"
+                    sh"terraform apply -auto-approve"
+                }
+            }
+        } 
     }
 }
