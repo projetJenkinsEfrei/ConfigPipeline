@@ -4,13 +4,13 @@ pipeline {
         ansiColor('xterm')
     }
     stages {
-        /*stage('Clean workspace')
+        stage('Clean workspace')
         {
             steps
             {
                 cleanWs()
             }
-        }*/
+        }
         stage('Git clone ansible and packer') 
         {
             steps 
