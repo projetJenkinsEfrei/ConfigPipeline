@@ -56,7 +56,7 @@ pipeline {
                 dir('Infra_dep')
                 {
                     sh"terraform init"
-                    sh"terraform apply -input=false"
+                    sh"terraform apply -auto-approve"
                 }
             }
         }        
