@@ -10,7 +10,7 @@ pipeline {
             {
                 cleanWs()
             }
-        }*/
+        }
         stage('Git clone ansible and packer') 
         {
             steps 
@@ -34,7 +34,7 @@ pipeline {
                     sh"packer build Packer/buildAMI.json"
                 }
             }
-        }
+        }*/
         stage('Git clone web infra deployement') 
         {
             steps 
@@ -56,8 +56,7 @@ pipeline {
                 dir('Infra_dep')
                 {
                     sh"terraform init"
-                    sh"terraform plan --out plan"
-                    sh"terraform apply plan -auto-approve"
+                    sh"terraform apply -input=false"
                 }
             }
         }        
