@@ -56,7 +56,7 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
-                    sh"terraform init -backend-config=\"path = \"/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/web/terraform.tfstate\"\""
+                    sh'terraform init -backend-config=\\"path=/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/web/terraform.tfstate\\"'
                     sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}' "
                 }
             }
