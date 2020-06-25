@@ -19,7 +19,7 @@ pipeline {
                 {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Build_AMI',
-                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
+                        credentialsId:'AccountMaster',
                         branch: "master"
 
                     )
@@ -44,7 +44,7 @@ pipeline {
                 {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_Infra',
-                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
+                        credentialsId:'AccountMaster',
                         branch: "master"
                     )
                 }
@@ -56,7 +56,7 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
-                    sh"terraform init"
+                    sh"terraform init -backend-config=\"path = \"/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/web/terraform.tfstate\"\""
                     sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}' "
                 }
             }
@@ -69,7 +69,7 @@ pipeline {
                 {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_WebApp',
-                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
+                        credentialsId:'AccountMaster',
                         branch: "master"
                     )
                 }
@@ -81,7 +81,7 @@ pipeline {
             {
                 dir('Web_dep')
                 {
-                    sh"terraform init"
+                    sh"terraform init -backend-config=\"path = \"/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/web/terraform.tfstate\"\""
                     sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}'"
                 }
             }
