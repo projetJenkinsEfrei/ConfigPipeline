@@ -19,8 +19,8 @@ pipeline {
                 {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Build_AMI',
-                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
-                        branch: "master"
+                        credentialsId:'AccountMaster',
+                        branch: "PRB-DEV"
 
                     )
                 }
@@ -44,8 +44,8 @@ pipeline {
                 {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_Infra',
-                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
-                        branch: "master"
+                        credentialsId:'AccountMaster',
+                        branch: "PRB-DEV"
                     )
                 }
             }
@@ -69,8 +69,8 @@ pipeline {
                 {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_WebApp',
-                        credentialsId:'4fcb3ce4-727f-415e-8bc3-8e5202658e10',
-                        branch: "master"
+                        credentialsId:'AccountMaster',
+                        branch: "PRB-DEV"
                     )
                 }
             }
