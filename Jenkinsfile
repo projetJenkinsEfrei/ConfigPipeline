@@ -57,7 +57,7 @@ pipeline {
                 dir('Infra_dep')
                 {
                     sh"terraform init"
-                    sh"terraform apply -auto-approve"
+                    sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}' "
                 }
             }
         }
@@ -82,7 +82,7 @@ pipeline {
                 dir('Web_dep')
                 {
                     sh"terraform init"
-                    sh"terraform apply -auto-approve"
+                    sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}'"
                 }
             }
         } 
