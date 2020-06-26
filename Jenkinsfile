@@ -21,7 +21,6 @@ pipeline {
                         url: 'https://github.com/birintha/CICD_TP_Build_AMI',
                         credentialsId:'AccountMaster',
                         branch: "PRB-DEV"
-
                     )
                 }
             }
@@ -32,7 +31,7 @@ pipeline {
             {
                 dir('Build_AMI')
                 {
-                    sh"packer build Packer/buildAMI.json"
+                    sh"packer build -var 'env=${env.JOB_BASE_NAME}' Packer/buildAMI.json"
                 }
             }
         }
@@ -56,7 +55,7 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
-                    sh"terraform init"
+                    sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/infra/terraform.tfstate'"
                     sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}' "
                 }
             }
@@ -81,7 +80,7 @@ pipeline {
             {
                 dir('Web_dep')
                 {
-                    sh"terraform init"
+                    sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/web/terraform.tfstate'"
                     sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}'"
                 }
             }
