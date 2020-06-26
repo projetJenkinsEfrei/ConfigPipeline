@@ -81,7 +81,7 @@ pipeline {
                 dir('Web_dep')
                 {
                     sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.GIT_BRANCH}/web/terraform.tfstate'"
-                    sh"terraform apply -auto-approve -var 'env=$${env.GIT_BRANCH}'"
+                    sh"terraform apply -auto-approve -var 'env=${env.GIT_BRANCH}'"
                 }
             }
         } 
