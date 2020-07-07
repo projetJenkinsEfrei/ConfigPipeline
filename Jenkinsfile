@@ -20,8 +20,7 @@ pipeline {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Build_AMI',
                         credentialsId:'AccountMaster',
-                        branch: "BSR-DEV"
-
+                        branch: "${env.GIT_BRANCH}"
                     )
                 }
             }
@@ -45,7 +44,7 @@ pipeline {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_Infra',
                         credentialsId:'AccountMaster',
-                        branch: "BSR-DEV"
+                        branch: "master"
                     )
                 }
             }
@@ -56,8 +55,8 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
-                    sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/infra/terraform.tfstate'"
-                    sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}' "
+                    sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.GIT_BRANCH}/infra/terraform.tfstate'"
+                    sh"terraform apply -auto-approve -var 'env=${env.GIT_BRANCH}' "
                 }
             }
         }
@@ -70,7 +69,7 @@ pipeline {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_WebApp',
                         credentialsId:'AccountMaster',
-                        branch: "BSR-DEV"
+                        branch: "master"
                     )
                 }
             }
@@ -81,8 +80,8 @@ pipeline {
             {
                 dir('Web_dep')
                 {
-                    sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.JOB_BASE_NAME}/web/terraform.tfstate'"
-                    sh"terraform apply -auto-approve -var 'env=${env.JOB_BASE_NAME}'"
+                    sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.GIT_BRANCH}/web/terraform.tfstate'"
+                    sh"terraform apply -auto-approve -var 'env=${env.GIT_BRANCH}'"
                 }
             }
         } 
