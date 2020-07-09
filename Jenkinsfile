@@ -85,5 +85,12 @@ pipeline {
                 }
             }
         } 
+        stage('Test')
+        {
+            steps
+            {
+               curl"curl -I  http://master-elb-194928174.eu-west-1.elb.amazonaws.com:443/"
+            }
+        } 
     }
 }
