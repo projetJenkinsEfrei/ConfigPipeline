@@ -45,7 +45,7 @@ pipeline {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_Infra',
                         credentialsId:'AccountMaster',
-                        branch: "${env.GIT_BRANCH}"
+                        branch: "master"
                     )
                 }
             }
@@ -70,7 +70,7 @@ pipeline {
                     git(
                         url: 'https://github.com/birintha/CICD_TP_Deploy_WebApp',
                         credentialsId:'AccountMaster',
-                        branch: "${env.GIT_BRANCH}"
+                        branch: "master"
                     )
                 }
             }
