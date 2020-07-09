@@ -82,7 +82,8 @@ pipeline {
             {
                 dir('Web_dep')
                 {
-                    sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.GIT_BRANCH}/web/terraform.tfstate'"
+                    //sh"terraform init -backend-config='path=/home/ubuntu/terraformState/${env.GIT_BRANCH}/web/terraform.tfstate'"
+                    sh "terraform init -backend-config='bucket=devops-bucket-pipeline' -backend-config='key=${env.GIT_BRANCH}/Web_dep/infra.tfstate' -backend-config='region=eu-west-1'"
                     sh"terraform apply -auto-approve -var 'env=${env.GIT_BRANCH}'"
                 }
             }
