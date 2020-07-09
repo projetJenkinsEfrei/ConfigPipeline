@@ -40,7 +40,7 @@ pipeline {
         {
             steps
             {
-                sh"amicleaner --mapping-key name --mapping-values '${env.GIT_BRANCH}' --full-report --keep-previous 0"
+                sh"amicleaner --mapping-key name --mapping-values '${env.GIT_BRANCH}' --full-report --keep-previous 0 -f"
             }
         }
         stage('Git clone infra deployement') 
