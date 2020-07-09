@@ -55,7 +55,8 @@ pipeline {
             {
                 dir('Infra_dep')
                 {
-                    sh"terraform init -backend-config='bucket=devops-bucket-pipeline' -backend-config='key=${env.GIT_BRANCH}/Infra_dep/infra.tfstate' -backend-config='region=eu-west-1'"
+                    //sh"terraform init -backend-config='bucket=devops-bucket-pipeline' -backend-config='key=${env.GIT_BRANCH}/Infra_dep/infra.tfstate' -backend-config='region=eu-west-1'"
+                    sh "terraform init -backend-config='bucket=devops-bucket-pipeline' -backend-config='key=${env.GIT_BRANCH}/Infra_dep/infra.tfstate' -backend-config='region=eu-west-1'"
                     sh"terraform apply -auto-approve -var 'env=${env.GIT_BRANCH}' "
                 }
             }
