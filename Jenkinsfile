@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        dnsname
+    } 
     options {
         ansiColor('xterm')
     }
@@ -88,13 +91,14 @@ pipeline {
                 }
             }
         } 
-        /*stage('Test')
+        stage('Test')
         {
             steps
             {
-               //sh"curl -I  http://${env.GIT_BRANCH}-elb-544180348.eu-west-1.elb.amazonaws.com:443/"
+               dnsname = sh(script: "aws elb describe-load-balancers --region eu-west-1 --load-balancer-name DY-DEV-elb | jq -j '.LoadBalancerDescriptions[].DNSName'", returnStdout:true)
+               sh"curl -I  http://${dnsname}:443/"
             }
         } 
-        */
+        
     }
 }
