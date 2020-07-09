@@ -2,6 +2,7 @@ pipeline {
     agent any
     options {
         ansiColor('xterm')
+        disableConcurrentBuilds()
     }
     stages {
         stage('Clean workspace')
