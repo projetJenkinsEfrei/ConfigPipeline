@@ -42,7 +42,8 @@ pipeline {
             {
                 dir('Clean_dep')
                 {
-                    sh"amicleaner --mapping-key name --mapping-values '${env.GIT_BRANCH}' --full-report --keep-previous 0 -f"
+                    sh"export AWS_DEFAULT_REGION='eu-west-1'"
+                    sh"/var/lib/jenkins/.local/bin/amicleaner --mapping-key name --mapping-values '${env.GIT_BRANCH}' --full-report --keep-previous 0 -f"
                 }
             }
         }
