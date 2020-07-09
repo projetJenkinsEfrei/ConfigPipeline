@@ -89,7 +89,7 @@ pipeline {
         {
             steps
             {
-               curl"curl -I  http://master-elb-194928174.eu-west-1.elb.amazonaws.com:443/"
+               sh"curl -I  http://master-elb-194928174.eu-west-1.elb.amazonaws.com:443/"
             }
         } 
     }
