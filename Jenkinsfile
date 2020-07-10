@@ -86,5 +86,10 @@ pipeline {
                 }
             }
         } 
+         stage ('Test') {
+            steps {
+                build job: './test'
+            }
+        }
     }
 }
