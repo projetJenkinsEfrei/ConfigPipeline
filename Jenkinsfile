@@ -92,14 +92,15 @@ pipeline {
                 }
             }
         } 
-        stage('Test')
+        /*stage('Test')
         {
             steps
             {
                dnsname = sh(script: "aws elb describe-load-balancers --region eu-west-1 --load-balancer-name DY-DEV-elb | jq -j '.LoadBalancerDescriptions[].DNSName'", returnStdout:true)
                sh"curl -I  http://${dnsname}:443/"
             }
-        } 
+        }
+        */
         stage ('Test') {
             steps {
                 build job: './test'
