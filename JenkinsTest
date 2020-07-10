@@ -1,0 +1,16 @@
+pipeline{
+    agent any
+    environment{
+        dnsname = sh(script:"aws elb describe-load-balancers --region eu-west-1 --load-balancer-name master-elb | jq -j '.LoadBalancerDescriptions[].DNSName'",returnStdout: true)
+    }
+    stages {
+        stage('Test DSN Name of Website'){
+            steps{
+                dir('test'){
+                    sh 'curl -I http://${dnsname}:443/'
+                }
+            }
+        }
+    }
+    
+}
