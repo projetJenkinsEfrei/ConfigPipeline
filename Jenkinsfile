@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        dnsname
-    } 
     options {
         ansiColor('xterm')
         disableConcurrentBuilds()
