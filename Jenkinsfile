@@ -9,7 +9,7 @@ pipeline {
         {
             steps
             {
-                echo 'test commit'
+                echo 'test commit prez'
             }
         }
         stage('Git clone ansible and packer') 
