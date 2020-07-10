@@ -5,13 +5,6 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
-        stage('Clean workspace')
-        {
-            steps
-            {
-                cleanWs()
-            }
-        }
         stage('Git clone ansible and packer') 
         {
             steps 
@@ -86,6 +79,12 @@ pipeline {
                 }
             }
         } 
-         
+        stage('Clean workspace')
+        {
+            steps
+            {
+                cleanWs()
+            }
+        }
     }
 }

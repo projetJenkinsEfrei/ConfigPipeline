@@ -4,13 +4,6 @@ pipeline {
         ansiColor('xterm')
     }
     stages {
-        stage('Clean workspace')
-        {
-            steps
-            {
-                cleanWs()
-            }
-        }
         stage('Git clone web deployement') 
         {
             steps 
@@ -71,6 +64,13 @@ pipeline {
                     sh "terraform init -backend-config='bucket=devops-bucket-pipeline' -backend-config='key=${env.GIT_BRANCH}/Infra_dep/infra.tfstate' -backend-config='region=eu-west-1'"
                     sh"terraform destroy -auto-approve -var 'env=${env.GIT_BRANCH}' "
                 }
+            }
+        }
+        stage('Clean workspace')
+        {
+            steps
+            {
+                cleanWs()
             }
         }
     }
