@@ -5,6 +5,13 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
+        stage('test commit')
+        {
+            steps
+            {
+                echo 'test commit'
+            }
+        }
         stage('Git clone ansible and packer') 
         {
             steps 
