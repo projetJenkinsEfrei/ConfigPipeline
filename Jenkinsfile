@@ -100,6 +100,11 @@ pipeline {
                sh"curl -I  http://${dnsname}:443/"
             }
         } 
+        stage ('Test') {
+            steps {
+                build job: './test'
+            }
+        }
         
     }
 }
